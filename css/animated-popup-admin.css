@@ -1,0 +1,15 @@
+.ap-parent {margin-bottom: 10px;}
+.ap-label {width: 24%; display: inline-block;}
+.ap-text-input {width: 75%; display: inline-block;}
+.ap-api-key input {width: 300px;}
+input.ap-auth-button {width: 84px;}
+.ap-parent input, .ap-parent textarea {border: 1px solid #787777;}
+.ap-parent input:disabled {border: 1px solid rgba(222, 222, 222, 0.75);}
+.ap-swatch {display: inline-block; margin-right: 40px; vertical-align: middle; width: 40px; height: 40px;}
+.ap-animation-example {width: 40px;height: 40px;}
+.ap-bg {max-width: 400px; margin: 30px auto;}
+.ap-container {width: 100%;}
+.ap-select {width: 170px;}
+
+.ap-error-label { width: 40%; display: inline-block; line-height:1.5; margin: 0.5em 0; }
+.ap-error-button { width: 59%; display: inline-block; vertical-align: middle; margin: 0.5em 0; }
