@@ -1,10 +1,10 @@
 === Animated Popup ===
 Contributors: whack47
-Donate Link: http://aklosismedia.com
+Developer Link: http://aklosismedia.com/quotes/dev
 Tags: animated, pop-up, popup, greensock, animation, easing, mailing list, mail, email, email list, mailing, list, wp_mail, wpmail, mailchimp, aweber, madmimi, made mimi, mailgun, mandrill, leads, expand, business, grow, grow your business, effective, marketing, email marketing, brand, newsletter, form, field, input, modern
 Requires at least: 3.8
 Tested up to: 4.2
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

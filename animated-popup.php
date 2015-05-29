@@ -3,7 +3,7 @@
 * Plugin Name: Animated Popup
 * Plugin URI: https://www.aklosismedia.com/quotes/dev/downloads/animated-popup
 * Description: An animated or static popup that can be activated several ways. Install with a shortcode or widget. Pro version includes implementation with MailChimp, AWeber, Mailgun and Mad Mimi.
-* Version: 1.0.0
+* Version: 1.0.1
 * Author: Marty Boggs
 * Author URI: https://www.aklosismedia.com/quotes/dev
 * Text Domain: Optional. Plugin's text domain for localization. Example: mytextdomain
@@ -375,8 +375,7 @@ function animated_popup_admin() {
 
             <h3>MailChimp</h3>
             <div class="ap-parent"><div class="ap-label">Enable Mailchimp:</div>
-                <div class="ap-text-input"><input name="mailchimp_enabled" type="checkbox"
-                <?php echo $apData['mailchimp_enabled'] === 'on' ? 'checked' : ''; ?> /></div>
+                <div class="ap-text-input"><input name="mailchimp_enabled" type="checkbox" disabled /></div>
             </div>
             <div class="ap-parent"><div class="ap-label">Your Mailchimp API Key:</div>
                 <div class="ap-text-input ap-api-key"><input disabled name="mailchimp_api_key" type="text"
@@ -399,54 +398,10 @@ function animated_popup_admin() {
                 <h3>AWeber</h3>
             </div>
 
-            <?php
-            function aweberAuthorize() { ?>
-                <div class="ap-text-input">
-                    <a href="https://auth.aweber.com/1.0/oauth/authorize_app/61851c54" target="_blank">Get Authorization Code at AWeber.com</a>
-                </div>
-                <div class="ap-parent">
-                    <div class="ap-label">Your Authorization Code:</div>
-                    <div class="ap-text-input ap-api-key">
-                        <input type="text" name="aweber_auth_code"  />
-                        <input type="submit" class="button-primary ap-auth-button" name="Submit" value="Authorize" />
-                    </div>
-                </div>
-                <?php
-            }
-
-            if ($apData['aweber_accessKey']
-            && $apData['aweber_accessSecret']) {
-                ?>
-                <p>You're Authorized!</p>
-                <?php
-            } else if ($apData['aweber_auth_code']) { // saved before or this time, above
-                require_once '/AWeber-API-PHP-Library/aweber_api/aweber_api.php';
-
-                try {
-                    $authorization_code = $apData['aweber_auth_code'];
-                    $auth = AWeberAPI::getDataFromAweberID($authorization_code);
-                    list($consumerKey, $consumerSecret, $accessKey, $accessSecret) = $auth;
-                    $apData['aweber_consumerKey'] = $consumerKey;
-                    $apData['aweber_consumerSecret'] = $consumerSecret;
-                    $apData['aweber_accessKey'] = $accessKey;
-                    $apData['aweber_accessSecret'] = $accessSecret;
-                    ?>
-                    <p>You Are Now Authorized!</p>
-                    <?php
-                } catch (AWeberAPIException $e) { // bad auth code
-                    echo $e->message;
-                    aweberAuthorize();
-                }
-            } else {
-                aweberAuthorize();
-            }
-
-
-            ?>
+            <!-- authorize section removed -->
 
             <div class="ap-parent"><div class="ap-label">Enable Aweber:</div>
-                <div class="ap-text-input"><input name="aweber_enabled" type="checkbox"
-                <?php echo $apData['aweber_enabled'] === 'on' ? 'checked' : ''; ?> /></div>
+                <div class="ap-text-input"><input name="aweber_enabled" type="checkbox" disabled /></div>
             </div>
             <div class="ap-parent"><div class="ap-label">Your AWeber List Name:</div>
                 <div class="ap-text-input"><input disabled name="aweber_list_id" type="text"
@@ -456,8 +411,7 @@ function animated_popup_admin() {
             <h3>Mailgun</h3>
 
             <div class="ap-parent"><div class="ap-label">Enable Mailgun:</div>
-                <div class="ap-text-input"><input name="mailgun_enabled" type="checkbox"
-                <?php echo $apData['mailgun_enabled'] === 'on' ? 'checked' : ''; ?> /></div>
+                <div class="ap-text-input"><input name="mailgun_enabled" type="checkbox" disabled /></div>
             </div>
             <div class="ap-parent"><div class="ap-label">Your Mailgun API Key:</div>
                 <div class="ap-text-input ap-api-key"><input disabled name="mailgun_api_key" type="text"
@@ -471,8 +425,7 @@ function animated_popup_admin() {
             <h3>Mad Mimi</h3>
 
             <div class="ap-parent"><div class="ap-label">Enable Mad Mimi:</div>
-                <div class="ap-text-input"><input name="madmimi_enabled" type="checkbox"
-                <?php echo $apData['madmimi_enabled'] === 'on' ? 'checked' : ''; ?> /></div>
+                <div class="ap-text-input"><input name="madmimi_enabled" type="checkbox" disabled />
             </div>
             <div class="ap-parent"><div class="ap-label">Your Mad Mimi Username/Email:</div>
                 <div class="ap-text-input"><input disabled name="madmimi_username" type="text"
