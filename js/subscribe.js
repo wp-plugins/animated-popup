@@ -21,6 +21,7 @@ jQuery(function () { // front end only code
     if (noIdea.popup_or_embed === 'popup') {
         jQuery('#' + noIdea.widget_id).css('margin', 0); // remove widget margin
         apCover.appendTo(document.body); // transplant to body
+        jQuery(document.body).css('position', 'relative');
 
         jQuery(document).click(function (e) {
             var event = e || window.event;

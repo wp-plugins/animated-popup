@@ -90,9 +90,8 @@ function popup_shortcode( $atts ) {
     $apData = get_site_option('animated_popup_data');
     if (!$apData) {
         require_once('animated-popup-data-init.php');
+        update_site_option('animated_popup_data', $apData);
     }
-    $apData['widget_id'] = $args['widget_id'];
-    update_site_option('animated_popup_data', $apData);
 
     if (is_front_page() && $apData['popup_or_embed'] === 'popup') {
         require_once 'animated-popup-popup.php';
@@ -122,8 +121,9 @@ class Popup_Widget extends WP_Widget {
         $apData = get_site_option('animated_popup_data');
         if (!$apData) {
             require_once('animated-popup-data-init.php');
-            update_site_option('animated_popup_data', $apData);
         }
+        $apData['widget_id'] = $args['widget_id'];
+        update_site_option('animated_popup_data', $apData);
 
 		echo $args['before_widget'];
 
