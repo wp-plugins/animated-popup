@@ -42,25 +42,30 @@ jQuery(function () { // front end only code
         }, 4000);
     }
 
-    setTimeout(function () {
-        jQuery(document).mouseup(function (e) {
-            var event = e || window.event;
-            var target = event.target || event.srcElement;
-            if (!apContainer.is(e.target)
-            && apContainer.has(e.target).length === 0) {
-                setAnimation(noIdea.animation, 0);
-            }
-        });
-    }, 4000);
-
+    var frozen = 0;
     jQuery(document).on('focusin', 'input', function (e) {
         var event = e || window.event;
         var target = event.target || event.srcElement;
         if (jQuery(target).hasClass('ap-input')) {
             setAnimation('none', 0);
+            frozen = 1;
         }
     });
 
+    setTimeout(function () {
+        jQuery(document).mouseup(function (e) {
+            if (frozen === 0) { return; }
+            else if (frozen === 1) { frozen = 2; return; }
+            // if froze is 2, then continue
+            var event = e || window.event;
+            var target = event.target || event.srcElement;
+            if (!apContainer.is(e.target)
+            && apContainer.has(e.target).length === 0) {
+                setAnimation(noIdea.animation, 0);
+                frozen = 0;
+            }
+        });
+    }, 4000);
 
     if (noIdea.enabled.length === 0 || !subscribed) {
 
