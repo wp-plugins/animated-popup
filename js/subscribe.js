@@ -1,10 +1,9 @@
 // check cookie first
 // localize needs enabled array and animation type
 
-var noIdea = localize;
 var subscribed = true;
-for (var i = 0; i < noIdea.enabled.length; i += 1) {
-    if (!jQuery.cookie('ap_' + noIdea.enabled[i])) {
+for (var i = 0; i < apLocalize.enabled.length; i += 1) {
+    if (!jQuery.cookie('ap_' + apLocalize.enabled[i])) {
         subscribed = false;
     }
 }
@@ -14,15 +13,20 @@ for (var i = 0; i < noIdea.enabled.length; i += 1) {
 //     return elem === document.activeElement && (elem.type || elem.href);
 // };
 
-jQuery(function () { // front end only code
-
+jQuery(window).load(function() {
     apBg.css('height', apContainer.css('height'));
+});
 
-    if (noIdea.popup_or_embed === 'popup') {
-        jQuery('#' + noIdea.widget_id).css('margin', 0); // remove widget margin
+
+jQuery(function () { // front end only code
+    apLocalize = window.apLocalize;
+
+    if (apLocalize.popup_or_embed === 'popup') {
+        jQuery('#' + apLocalize.widget_id).css('margin', 0); // remove widget margin
         apCover.appendTo(document.body); // transplant to body
+        jQuery(document.body).css('position', 'relative');
 
-        jQuery(document).click(function (e) {
+        jQuery(document).on('click', function (e) {
             var event = e || window.event;
             var target = event.target || event.srcElement;
             if (target.id === 'popup-closer') {
@@ -41,36 +45,41 @@ jQuery(function () { // front end only code
         }, 4000);
     }
 
-    setTimeout(function () {
-        jQuery(document).mouseup(function (e) {
-            var event = e || window.event;
-            var target = event.target || event.srcElement;
-            if (!apContainer.is(e.target)
-            && apContainer.has(e.target).length === 0) {
-                setAnimation(noIdea.animation, 0);
-            }
-        });
-    }, 4000);
-
+    var frozen = 0;
     jQuery(document).on('focusin', 'input', function (e) {
         var event = e || window.event;
         var target = event.target || event.srcElement;
         if (jQuery(target).hasClass('ap-input')) {
             setAnimation('none', 0);
+            frozen = 1;
         }
     });
 
+    setTimeout(function () {
+        jQuery(document).mouseup(function (e) {
+            if (frozen === 0) { return; }
+            else if (frozen === 1) { frozen = 2; return; }
+            // if froze is 2, then continue
+            var event = e || window.event;
+            var target = event.target || event.srcElement;
+            if (!apContainer.is(e.target)
+            && apContainer.has(e.target).length === 0) {
+                setAnimation(apLocalize.animation, 0);
+                frozen = 0;
+            }
+        });
+    }, 4000);
 
-    if (noIdea.enabled.length === 0 || !subscribed) {
+    if (apLocalize.enabled.length === 0 || !subscribed) {
 
-        setAnimation(noIdea.animation, 4);
+        setAnimation(apLocalize.animation, 4);
 
         apForm.submit(function (e) {
             e.preventDefault();
-            jQuery.post(noIdea.ajaxurl, {
+            jQuery.post(apLocalize.ajaxurl, {
                 email: apInput.val(),
                 action: 'myajax-submit',
-                subscribeNonce: noIdea.subscribeNonce
+                subscribeNonce: apLocalize.subscribeNonce
             }, function (data) {
                 console.log(data);
                 if (!result.validation) return;
