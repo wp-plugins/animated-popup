@@ -3,7 +3,7 @@
 * Plugin Name: Animated Popup
 * Plugin URI: https://www.aklosismedia.com/quotes/dev/downloads/animated-popup
 * Description: An animated or static popup that can be activated several ways. Install with a shortcode or widget. Pro version includes implementation with MailChimp, AWeber, Mailgun and Mad Mimi.
-* Version: 1.0.2
+* Version: 1.1
 * Author: Marty Boggs
 * Author URI: https://www.aklosismedia.com/quotes/dev
 * Text Domain: Optional. Plugin's text domain for localization. Example: mytextdomain
@@ -39,7 +39,7 @@ function popup_script () {
     wp_enqueue_script( 'ap-elements',   plugin_dir_url( __FILE__ ) . 'js/elements.js', array( 'jquery' ) );
     wp_enqueue_script( 'ap-subscribe',  plugin_dir_url( __FILE__ ) . 'js/subscribe.js', array( 'jquery', 'ap-elements' ) );
     wp_enqueue_script( 'ap-animation',  plugin_dir_url( __FILE__ ) . 'js/animation.js', array( 'jquery', 'ap-subscribe', 'ap-elements' ) );
-    wp_localize_script( 'ap-subscribe', 'localize', array(
+    wp_localize_script( 'ap-subscribe', 'apLocalize', array(
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
         'subscribeNonce' => wp_create_nonce('subscribe-nonce'),
         'enabled' => $enabled,
