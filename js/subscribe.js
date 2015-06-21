@@ -82,8 +82,8 @@ jQuery(function () { // front end only code
                 subscribeNonce: apLocalize.subscribeNonce
             }, function (data) {
                 console.log(data);
-                if (!result.validation) return;
                 var result = JSON.parse(data);
+                if (!result.validation) return;
                 for (var i = 0; i < result.enabled.length; i += 1) {
                     jQuery.cookie('ap_' + result.enabled[i], 'true', {expires: 1825, path: '/'});
                 }
