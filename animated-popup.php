@@ -3,7 +3,7 @@
 * Plugin Name: Animated Popup
 * Plugin URI: https://www.aklosismedia.com/quotes/dev/downloads/animated-popup
 * Description: An animated or static popup that can be activated several ways. Install with a shortcode or widget. Pro version includes implementation with MailChimp, AWeber, Mailgun and Mad Mimi.
-* Version: 1.1.1
+* Version: 1.1.2
 * Author: Marty Boggs
 * Author URI: https://www.aklosismedia.com/quotes/dev
 * Text Domain: Optional. Plugin's text domain for localization. Example: mytextdomain

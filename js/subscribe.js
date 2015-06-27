@@ -74,7 +74,7 @@ jQuery(function () { // front end only code
 
         setAnimation(apLocalize.animation, 4);
 
-        apForm.submit(function (e) {
+        apButton.on('click', function (e) {
             e.preventDefault();
             jQuery.post(apLocalize.ajaxurl, {
                 email: apInput.val(),
@@ -90,7 +90,7 @@ jQuery(function () { // front end only code
             });
         });
     } else {
-        apForm.submit(function (e) {
+        apButton.on('click', function (e) {
             e.preventDefault();
         });
     }
